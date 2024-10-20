@@ -11,7 +11,7 @@ function App() {
 
   async function login(): Promise<void> {
     setError('')
-    const response = await fetch('https://localhost:8000/api/login', {
+    const response = await fetch('https://127.0.0.1:8001/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ function App() {
   }
 
   async function ping() {
-    console.log(await fetch("https://localhost:8000/api/ping", {
+    console.log(await fetch("https://127.0.0.1:8001/api/ping", {
       headers: {
 
       },
