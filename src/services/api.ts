@@ -1,4 +1,4 @@
-import { env } from "../env";
+import { env } from "../env.ts";
 
 class Api {
   private async fetch<ResponseType>({ body, method, path }: { path: string, body?: object, method: 'POST' | 'GET' | 'DELETE' }): Promise<ResponseType> {
