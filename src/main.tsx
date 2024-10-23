@@ -3,13 +3,36 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import {
     createBrowserRouter, Navigate,
-    RouterProvider,
+    RouterProvider
 } from "react-router-dom";
+import Dashboard from './routes/dashboard.tsx';
+import PrivateRoute from './routes/protected-route.tsx';
+import { appRoutePrefix, routes } from './routes/route-names.ts';
+import Login from './routes/login.tsx';
+import Register from './routes/register.tsx';
 
 const router = createBrowserRouter([
   {
+    path: routes.login,
+    element: <Login />
+  },
+  {
+    path: routes.register,
+    element: <Register />
+  },
+  {
     path: "/",
-    element: <div>Hello Olex!</div>,
+    element: <Navigate to={routes.dashboard} />
+  },
+  {
+    path: appRoutePrefix,
+    element: <PrivateRoute />,
+    children: [
+      {
+        path: routes.dashboard,
+        element: <Dashboard />
+      }
+    ]
   }
 ])
 
