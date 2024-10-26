@@ -13,7 +13,7 @@ function Login() {
     const [token, setToken] = useState(
         localStorage.getItem(tokenStorageKey)
     )
-    const [toDashboard, setToDashboard] = useState(false)
+    const [toSelectOrganization, setToSelectOrganization] = useState(false)
     const [toRegister, setToRegister] = useState(false)
     useEffect(() => {
         console.log('token', token)
@@ -21,11 +21,11 @@ function Login() {
             return
         }
         localStorage.setItem(tokenStorageKey, token)
-        setToDashboard(true)
+        setToSelectOrganization(true)
     }, [token]);
 
-    if (toDashboard) {
-        return <Navigate to={routes.dashboard} />
+    if (toSelectOrganization) {
+        return <Navigate to={routes.selectOrg} />
     }
     if (toRegister) {
         return <Navigate to={routes.register} />

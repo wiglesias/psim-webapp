@@ -49,6 +49,13 @@ class Api {
           method: 'GET',
       })
   }
+
+  public getMyOrganizations() {
+    return this.fetch<{ organizations: { id: number, name: string }[] }>({
+        path: '/organization',
+        method: 'GET',
+    })
+}
 }
 
 export default new Api()

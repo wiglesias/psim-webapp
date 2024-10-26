@@ -10,6 +10,7 @@ import PrivateRoute from './routes/protected-route.tsx';
 import { appRoutePrefix, routes } from './routes/route-names.ts';
 import Login from './routes/login.tsx';
 import Register from './routes/register.tsx';
+import MyOrganizations from './routes/my-organization.tsx';
 
 const router = createBrowserRouter([
   {
@@ -21,8 +22,12 @@ const router = createBrowserRouter([
     element: <Register />
   },
   {
-    path: "/",
+    path: '/',
     element: <Navigate to={routes.dashboard} />
+  },
+  {
+    path: routes.selectOrg,
+    element: <MyOrganizations />
   },
   {
     path: appRoutePrefix,
