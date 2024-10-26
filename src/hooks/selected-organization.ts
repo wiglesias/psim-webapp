@@ -1,8 +1,8 @@
 import selectedOrganizationStorage from "../services/selected-organization-storage.ts";
 
-export function useSelectedOrganization(){
+export function useSelectedOrganization() {
   return {
-    setSelectedOrganization: selectedOrganizationStorage.setOrganization,
-    getSelectedOrganization: () => selectedOrganizationStorage.getOrganization()
+    setSelectedOrganization: selectedOrganizationStorage.setOrg,
+    getSelectedOrganization: () => selectedOrganizationStorage.getOrg()
   }
 }

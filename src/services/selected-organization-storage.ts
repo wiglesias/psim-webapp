@@ -1,13 +1,13 @@
 export type SelectedOrganization = { id: number, name: string }
 
 class SelectedOrganizationStorage {
-  public getOrganization(): SelectedOrganization | null {
+  public getOrg(): SelectedOrganization | null {
     const selectedOrganization = localStorage.getItem('selected_organization')
 
     return selectedOrganization ? JSON.parse(selectedOrganization) : null
   }
 
-  public setOrganization(organization: SelectedOrganization) {
+  public setOrg(organization: SelectedOrganization) {
     localStorage.setItem('selected_organization', JSON.stringify(organization))
   }
 }

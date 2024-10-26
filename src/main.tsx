@@ -7,10 +7,11 @@ import {
 } from "react-router-dom";
 import Dashboard from './routes/dashboard.tsx';
 import PrivateRoute from './routes/protected-route.tsx';
-import { appRoutePrefix, routes } from './routes/route-names.ts';
+import { appRoutePrefix, profileRoutePrefix, routes } from './routes/route-names.ts';
 import Login from './routes/login.tsx';
 import Register from './routes/register.tsx';
 import MyOrganizations from './routes/my-organization.tsx';
+import Navbar from './components/navbar.tsx';
 
 const router = createBrowserRouter([
   {
@@ -26,8 +27,14 @@ const router = createBrowserRouter([
     element: <Navigate to={routes.dashboard} />
   },
   {
-    path: routes.selectOrg,
-    element: <MyOrganizations />
+    path: profileRoutePrefix,
+    element: <PrivateRoute requiresOrganization={false} />,
+    children: [
+      {
+        path: routes.selectOrg,
+        element: <MyOrganizations />
+      }
+    ]
   },
   {
     path: appRoutePrefix,
@@ -43,6 +50,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <div>
+      <Navbar />
+      <RouterProvider router={router} />
+    </div>
   </React.StrictMode>,
 )

@@ -1,20 +1,22 @@
-import { env } from "../env.ts";
+import {env} from "../env.ts";
+import selectedOrganizationStorage from "./selected-organization-storage.ts";
 
 class Api {
   private async fetch<ResponseType>({ body, method, path }: { path: string, body?: object, method: 'POST' | 'GET' | 'DELETE' }): Promise<ResponseType> {
     const token = localStorage.getItem('token')
+    const selectedOrganization = selectedOrganizationStorage.getOrg()
     const response = await fetch(`${env.api.baseUrl}${path}`, {
       headers: {
         'accept': 'application/json',
         'content-type': 'application/json',
         ...(token ? { 'authorization': `Bearer ${token}` } : {}),
+        ...(selectedOrganization ? { 'x-organization-id': String(selectedOrganization.id) } : {})
       },
       body: body ? JSON.stringify(body) : undefined,
       method: method,
     })
 
     if (!response.ok) {
-      //todo Improve error shown based on api response
       throw new Error('Api failed')
     }
 
@@ -26,8 +28,8 @@ class Api {
       method: 'POST',
       path: '/auth/register',
       body: {
-          email: email,
-          password: password,
+        email: email,
+        password: password,
       }
     })
   }
@@ -37,8 +39,8 @@ class Api {
       method: 'POST',
       path: '/auth/login',
       body: {
-          email: email,
-          password: password,
+        email: email,
+        password: password,
       }
     })
   }
@@ -50,17 +52,17 @@ class Api {
     })
   }
 
-  public getMyOrganizations() {
-    return this.fetch<{ organizations: { id: number, name: string }[] }>({
-      path: '/organization',
+  public getProducts() {
+    return this.fetch<{ products: { id: number, name: string }[] }>({
+      path: '/product',
       method: 'GET',
     })
   }
 
-  public getProducts() {
-    return this.fetch<{ products: { id: number, name: string }[] }>({
-      path: '/product',
-      method: 'GET'
+  public getMyOrganizations() {
+    return this.fetch<{ organizations: { id: number, name: string }[] }>({
+      path: '/organization',
+      method: 'GET',
     })
   }
 }
