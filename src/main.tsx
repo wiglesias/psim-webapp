@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import {
-    createBrowserRouter, Navigate,
-    RouterProvider
+  createBrowserRouter, Navigate,
+  RouterProvider
 } from "react-router-dom";
 import Dashboard from './routes/dashboard.tsx';
 import PrivateRoute from './routes/protected-route.tsx';
